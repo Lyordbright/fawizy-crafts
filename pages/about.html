@@ -3,217 +3,769 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>About Us - Fawizy Footwear</title>
+  <title>About Us - Fawizy Footwear | Premium Handcrafted Shoes & Sandals</title>
+  <meta name="description" content="Discover Fawizy Footwear - Nigerian handcrafted premium shoes, sandals, and palm slippers. Learn about our craftsmanship, values, and customer stories.">
+  
+  <!-- Preload resources -->
+  <link rel="preload" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" as="style">
+  <link rel="preload" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" as="style">
+  <link rel="preconnect" href="https://cdn.jsdelivr.net">
+  
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  
   <!-- Swiper CSS -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+  
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <link rel="shortcut icon" href="../media/WhatsApp Image 2025-07-28 at 10.32.31_4cf5d62b.jpg" type="image/x-icon">
+  
   <style>
+    :root {
+      --primary: #ffd700;
+      --primary-dark: #d4b000;
+      --bg: #000;
+      --text: #fff;
+      --text-secondary: #aaa;
+      --card-bg: #111;
+      --border-radius: 10px;
+    }
+    
     body {
-      background-color: #000;
-      color: #ffd700;
-      font-family: 'Segoe UI', sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      line-height: 1.6;
+      scroll-behavior: smooth;
     }
+    
+    /* Navbar */
     .navbar {
-      background-color: #000;
+      background-color: var(--bg);
+      padding: 15px 0;
+      transition: all 0.3s ease;
+      border-bottom: 1px solid rgba(255, 215, 0, 0.1);
     }
+    
+    .navbar.scrolled {
+      padding: 10px 0;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    }
+    
     .navbar-brand img {
-      height: 100px;
+      height: 80px;
+      transition: height 0.3s ease;
     }
+    
+    .navbar.scrolled .navbar-brand img {
+      height: 60px;
+    }
+    
     .nav-link {
-      color: #f1c40f !important;
+      color: var(--primary) !important;
+      font-weight: 500;
+      margin: 0 10px;
+      position: relative;
+      padding: 8px 0 !important;
     }
+    
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background-color: var(--primary);
+      transition: width 0.3s ease;
+    }
+    
+    .nav-link:hover::after,
+    .nav-link.active::after {
+      width: 100%;
+    }
+    
     .nav-link:hover {
-      color: #fff !important;
+      color: var(--text) !important;
     }
+    
+    .nav-link.active {
+      color: var(--text) !important;
+      font-weight: 600;
+    }
+    
+    /* Hero Section */
     .about-hero {
-      background: url('https://i.pinimg.com/1200x/fa/93/37/fa9337362f9b784fbfbcba6b5a8d9356.jpg') center center/cover no-repeat;
+      background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://i.pinimg.com/1200x/fa/93/37/fa9337362f9b784fbfbcba6b5a8d9356.jpg') center center/cover no-repeat;
       color: white;
-      padding: 100px 0;
-      text-shadow: 1px 1px 10px #000;
+      padding: 120px 0;
+      text-align: center;
+      display: flex;
+      align-items: center;
+      min-height: 60vh;
     }
+    
+    .about-hero h1 {
+      font-size: clamp(2.5rem, 5vw, 3.5rem);
+      font-weight: 700;
+      margin-bottom: 20px;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+    }
+    
+    .about-hero p {
+      font-size: clamp(1.1rem, 2vw, 1.3rem);
+      max-width: 800px;
+      margin: 0 auto 30px;
+    }
+    
+    /* About Section */
     .about-section {
-      padding: 60px 0;
+      padding: 80px 0;
     }
+    
     .about-section h2 {
-      font-weight: bold;
-      color: #ffd700;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 30px;
+      position: relative;
+      display: inline-block;
     }
+    
+    .about-section h2::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 0;
+      width: 50%;
+      height: 3px;
+      background-color: var(--primary);
+    }
+    
     .about-section p {
       font-size: 1.1rem;
+      margin-bottom: 20px;
     }
+    
+    .about-img {
+      border-radius: var(--border-radius);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+      transition: transform 0.3s ease;
+    }
+    
+    .about-img:hover {
+      transform: scale(1.02);
+    }
+    
+    /* Values Section */
+    .values-section {
+      padding: 80px 0;
+      background-color: var(--card-bg);
+    }
+    
     .values-box {
-      background-color: #111;
+      background-color: var(--bg);
       padding: 30px;
-      border-radius: 10px;
-      border: 1px solid #ffd70044;
-      box-shadow: 0 0 15px #00000099;
+      border-radius: var(--border-radius);
+      border: 1px solid rgba(255, 215, 0, 0.2);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+      height: 100%;
+      transition: all 0.3s ease;
     }
-    footer {
-      background-color: #111;
-      padding: 30px 0;
+    
+    .values-box:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 30px rgba(255, 215, 0, 0.1);
+      border-color: rgba(255, 215, 0, 0.4);
+    }
+    
+    .values-box h4 {
+      color: var(--primary);
+      margin-bottom: 15px;
+      font-weight: 600;
+    }
+    
+    .values-box i {
+      font-size: 2rem;
+      color: var(--primary);
+      margin-bottom: 15px;
+      display: inline-block;
+    }
+    
+    /* Testimonials */
+    .testimonials {
+      padding: 80px 0;
+      background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), url('https://images.unsplash.com/photo-1460353581641-37baddab0fa2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1471&q=80') center/cover;
+      color: var(--text);
+    }
+    
+    .testimonials h2 {
+      color: var(--primary);
+      margin-bottom: 50px;
       text-align: center;
-      color: #aaa;
+    }
+    
+    .swiper-slide {
+      background: rgba(17, 17, 17, 0.9);
+      padding: 30px;
+      border-radius: var(--border-radius);
+      border: 1px solid rgba(255, 215, 0, 0.2);
+      transition: all 0.3s ease;
+    }
+    
+    .swiper-slide:hover {
+      border-color: rgba(255, 215, 0, 0.4);
+    }
+    
+    .testimonial-img {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid var(--primary);
+    }
+    
+    .testimonial-author {
+      font-weight: 600;
+      margin-bottom: 5px;
+    }
+    
+    .testimonial-location {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      margin-bottom: 15px;
+    }
+    
+    .testimonial-text {
+      font-style: italic;
+      margin-bottom: 15px;
+    }
+    
+    .testimonial-rating {
+      color: var(--primary);
+      font-size: 1rem;
+    }
+    
+    .swiper-pagination-bullet {
+      background: var(--text);
+      opacity: 0.5;
+    }
+    
+    .swiper-pagination-bullet-active {
+      background: var(--primary);
+      opacity: 1;
+    }
+    
+    
+    /* Footer */
+    .footer {
+      background: #111;
+      padding: 40px 0 20px;
+      color: var(--text-secondary);
+    }
+    
+    .footer-logo img {
+      height: 80px;
+      margin-bottom: 20px;
+    }
+    
+    .footer-links h5 {
+      color: var(--primary);
+      margin-bottom: 20px;
+      font-size: 1.2rem;
+    }
+    
+    .footer-links ul {
+      list-style: none;
+      padding: 0;
+    }
+    
+    .footer-links li {
+      margin-bottom: 10px;
+    }
+    
+    .footer-links a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+    
+    .footer-links a:hover {
+      color: var(--primary);
+      padding-left: 5px;
+    }
+    
+    .social-icons {
+      display: flex;
+      gap: 15px;
+      margin-top: 20px;
+    }
+    
+    .social-icons a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 50%;
+      color: var(--text);
+      transition: all 0.3s ease;
+    }
+    
+    .social-icons a:hover {
+      background: var(--primary);
+      color: #000;
+      transform: translateY(-3px);
+    }
+    
+    .copyright {
+      margin-top: 40px;
+      padding-top: 20px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      font-size: 0.9rem;
+    }
+    
+    /* WhatsApp Floating Chat */
+    .float-chat {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 999;
+      animation: pulse 1.5s infinite;
+    }
+    
+    .float-chat a {
+      background: #25D366;
+      color: white;
+      padding: 12px 20px;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+      transition: all 0.3s ease;
+    }
+    
+    .float-chat a:hover {
+      background: #20b358;
+      transform: translateY(-3px);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+    }
+    
+    .float-chat img {
+      margin-right: 10px;
+      width: 24px;
+      height: 24px;
+    }
+    
+    /* Back to Top */
+    .back-to-top {
+      position: fixed;
+      bottom: 80px;
+      right: 20px;
+      width: 40px;
+      height: 40px;
+      background: var(--primary);
+      color: #000;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+      z-index: 999;
+    }
+    
+    .back-to-top.active {
+      opacity: 1;
+      visibility: visible;
+    }
+    
+    .back-to-top:hover {
+      background: var(--primary-dark);
+    }
+    
+    /* Animations */
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+      100% { transform: scale(1); }
+    }
+    
+    /* Responsive Adjustments */
+    @media (max-width: 991.98px) {
+      .navbar-collapse {
+        background: var(--bg);
+        padding: 20px;
+        margin-top: 15px;
+        border-radius: 5px;
+      }
+      
+      .about-hero {
+        padding: 100px 0;
+      }
+    }
+    
+    @media (max-width: 767.98px) {
+      .about-hero h1 {
+        font-size: 2.2rem;
+      }
+      
+      .about-hero p {
+        font-size: 1.1rem;
+      }
+      
+      .about-section {
+        padding: 60px 0;
+      }
+      
+      .values-box {
+        margin-bottom: 20px;
+      }
     }
   </style>
 </head>
 <body>
 
   <!-- Navbar -->
-  <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
-    <div class="container">
+  <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+    <div class="container" id="nav">
       <a class="navbar-brand" href="../index.html">
         <img src="../media/WhatsApp Image 2025-07-28 at 10.32.31_4cf5d62b.jpg" alt="Fawizy Logo">
       </a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
         <ul class="navbar-nav">
           <li class="nav-item"><a class="nav-link" href="../index.html">Home</a></li>
-          <li class="nav-item"><a class="nav-link" href="./about.html">About</a></li>
-          <li class="nav-item"><a class="nav-link active" href="./gallery.html">Gallery</a></li>
+          <li class="nav-item"><a class="nav-link active" href="./about.html">About</a></li>
+          <li class="nav-item"><a class="nav-link" href="./gallery.html">Gallery</a></li>
           <li class="nav-item"><a class="nav-link" href="./contact.html">Contact</a></li>
+        <li class="nav-item"><a class="nav-link" href="./legal.html">Legal</a></li>
         </ul>
       </div>
     </div>
   </nav>
 
   <!-- Hero Section -->
-  <section class="about-hero text-center">
+  <section class="about-hero">
     <div class="container">
       <h1 class="display-4 fw-bold">Crafted with Passion & Purpose</h1>
-      <p class="lead">At Fawizy, we don’t just make shoes — we craft confidence.</p>
+      <p class="lead">At Fawizy, we don't just make shoes — we craft confidence for every step you take.</p>
+      <a href="#our-story" class="btn btn-outline-light btn-lg mt-3">Our Story</a>
     </div>
   </section>
 
   <!-- About Section -->
-  <section class="about-section container">
+  <section class="about-section container" id="our-story">
     <div class="row align-items-center">
-      <div class="col-md-6 mb-4">
-        <img src="../media/WhatsApp Image 2025-07-28 at 10.32.31_4cf5d62b.jpg" alt="Workshop" class="img-fluid rounded shadow" />
+      <div class="col-lg-6 mb-4 mb-lg-0">
+        <img src="../media/WhatsApp Image 2025-07-28 at 10.32.31_4cf5d62b.jpg" alt="Fawizy Workshop" class="img-fluid about-img" loading="lazy">
       </div>
-      <div class="col-md-6">
+      <div class="col-lg-6">
         <h2>Who We Are</h2>
         <p>
-          Fawizy Footwear is a proudly Nigerian brand dedicated to creating high-quality, handcrafted footwear for men and women.
-          From sandals to palm slippers and bold statement shoes, every pair is made with care, craftsmanship, and culture.
+          Founded in Ibadan, Nigeria, Fawizy Footwear is a premium brand dedicated to creating high-quality, handcrafted footwear that blends traditional craftsmanship with contemporary design. Our journey began with a simple vision: to create footwear that tells a story of African excellence.
         </p>
         <p>
-          We believe in walking with confidence — and our products are designed to give you exactly that. Whether you’re dressing for
-          style, comfort, or tradition, we’ve got something bold for your feet.
+          Each pair in our collection - from sandals to palm slippers and statement shoes - is meticulously crafted by skilled artisans who pour their expertise into every stitch. We use only the finest materials, ensuring durability without compromising on style.
+        </p>
+        <p>
+          More than just footwear, we're building a movement that celebrates African creativity and empowers local craftsmanship. When you wear Fawizy, you're not just making a fashion statement - you're supporting a legacy.
         </p>
       </div>
     </div>
   </section>
 
   <!-- Values Section -->
-  <section class="about-section bg-dark text-center">
+  <section class="values-section">
     <div class="container">
-      <h2 class="mb-5">Our Core Values</h2>
+      <div class="row justify-content-center mb-5">
+        <div class="col-lg-8 text-center">
+          <h2>Our Core Values</h2>
+          <p class="lead">These principles guide every step we take in our creative process</p>
+        </div>
+      </div>
       <div class="row g-4">
         <div class="col-md-4">
           <div class="values-box">
+            <i class="fas fa-hammer"></i>
             <h4>Craftsmanship</h4>
-            <p>Every product is made with attention to detail and a passion for quality design.</p>
+            <p>Every product reflects our commitment to excellence, with attention to detail and passion for quality design that stands the test of time.</p>
           </div>
         </div>
         <div class="col-md-4">
           <div class="values-box">
-            <h4>Style</h4>
-            <p>Our pieces blend culture with class to make every step you take feel bold and intentional.</p>
+            <i class="fas fa-shoe-prints"></i>
+            <h4>Authentic Style</h4>
+            <p>Our pieces blend cultural heritage with contemporary aesthetics to create footwear that makes every step bold and intentional.</p>
           </div>
         </div>
         <div class="col-md-4">
           <div class="values-box">
-            <h4>Community</h4>
-            <p>We support local artisans and inspire confidence in every walk of life.</p>
+            <i class="fas fa-hands-helping"></i>
+            <h4>Community Impact</h4>
+            <p>We're committed to empowering local artisans and creating opportunities that inspire confidence in every walk of life.</p>
           </div>
         </div>
       </div>
     </div>
   </section>
-  <section class="testimonials py-5 bg-light" data-aos="fade-up">
-  <div class="container">
-    <h2 class="text-center mb-4">What Our Customers Say</h2>
 
-    <div class="swiper testimonialSwiper">
-      <div class="swiper-wrapper">
-
-        <!-- Slide 1 -->
-        <div class="swiper-slide p-4 bg-white rounded shadow">
-          <div class="d-flex align-items-center mb-3">
-            <img src="https://randomuser.me/api/portraits/men/32.jpg" class="rounded-circle me-3" width="60" alt="Customer 1">
-            <div>
-              <h5 class="mb-0">Tunde Adewale</h5>
-              <small>Ibadan, Nigeria</small>
+  <!-- Testimonials Section -->
+  <section class="testimonials">
+    <div class="container">
+      <h2>What Our Customers Say</h2>
+      
+      <div class="swiper testimonialSwiper mt-4">
+        <div class="swiper-wrapper">
+          <!-- Slide 1 -->
+          <div class="swiper-slide">
+            <div class="d-flex align-items-center mb-3">
+              <img src="https://randomuser.me/api/portraits/men/32.jpg" class="testimonial-img me-3" alt="Tunde Adewale" loading="lazy">
+              <div>
+                <h5 class="testimonial-author mb-0">Tunde Adewale</h5>
+                <small class="testimonial-location">Ibadan, Nigeria</small>
+              </div>
+            </div>
+            <p class="testimonial-text">"The quality of the sandals I got from Fawizy is exceptional. After 8 months of daily wear, they still look and feel amazing. Worth every naira!"</p>
+            <div class="testimonial-rating">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
             </div>
           </div>
-          <p class="mb-2">“The quality of the sandals I got from Fawizy is amazing. Durable and stylish.”</p>
-          <div class="text-warning">
-            ★★★★★
-          </div>
-        </div>
-
-        <!-- Slide 2 -->
-        <div class="swiper-slide p-4 bg-white rounded shadow">
-          <div class="d-flex align-items-center mb-3">
-            <img src="https://randomuser.me/api/portraits/women/45.jpg" class="rounded-circle me-3" width="60" alt="Customer 2">
-            <div>
-              <h5 class="mb-0">Ngozi Chima</h5>
-              <small>Lagos, Nigeria</small>
+          
+          <!-- Slide 2 -->
+          <div class="swiper-slide">
+            <div class="d-flex align-items-center mb-3">
+              <img src="https://randomuser.me/api/portraits/women/45.jpg" class="testimonial-img me-3" alt="Ngozi Chima" loading="lazy">
+              <div>
+                <h5 class="testimonial-author mb-0">Ngozi Chima</h5>
+                <small class="testimonial-location">Lagos, Nigeria</small>
+              </div>
+            </div>
+            <p class="testimonial-text">"I love how unique and comfortable the shoes are. I get compliments everywhere I go. The palm slippers are perfect for our hot weather too!"</p>
+            <div class="testimonial-rating">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star-half-alt"></i>
             </div>
           </div>
-          <p class="mb-2">“I love how unique and handmade the shoes are. Highly recommended!”</p>
-          <div class="text-warning">
-            ★★★★☆
-          </div>
-        </div>
-
-        <!-- Slide 3 -->
-        <div class="swiper-slide p-4 bg-white rounded shadow">
-          <div class="d-flex align-items-center mb-3">
-            <img src="https://randomuser.me/api/portraits/men/75.jpg" class="rounded-circle me-3" width="60" alt="Customer 3">
-            <div>
-              <h5 class="mb-0">Femi Lawal</h5>
-              <small>Abuja, Nigeria</small>
+          
+          <!-- Slide 3 -->
+          <div class="swiper-slide">
+            <div class="d-flex align-items-center mb-3">
+              <img src="https://randomuser.me/api/portraits/men/75.jpg" class="testimonial-img me-3" alt="Femi Lawal" loading="lazy">
+              <div>
+                <h5 class="testimonial-author mb-0">Femi Lawal</h5>
+                <small class="testimonial-location">Abuja, Nigeria</small>
+              </div>
+            </div>
+            <p class="testimonial-text">"As someone who values both style and supporting local businesses, Fawizy checks all boxes. The craftsmanship rivals international brands at better prices."</p>
+            <div class="testimonial-rating">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
             </div>
           </div>
-          <p class="mb-2">“Affordable, fashionable, and made with care. Fawizy is my go-to brand.”</p>
-          <div class="text-warning">
-            ★★★★★
+          
+          <!-- Slide 4 -->
+          <div class="swiper-slide">
+            <div class="d-flex align-items-center mb-3">
+              <img src="https://randomuser.me/api/portraits/women/68.jpg" class="testimonial-img me-3" alt="Amina Yusuf" loading="lazy">
+              <div>
+                <h5 class="testimonial-author mb-0">Amina Yusuf</h5>
+                <small class="testimonial-location">Kano, Nigeria</small>
+              </div>
+            </div>
+            <p class="testimonial-text">"I ordered three pairs for my family abroad and they loved them! The packaging was premium and delivery was faster than expected. Will definitely order again."</p>
+            <div class="testimonial-rating">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+            </div>
           </div>
         </div>
-
+        
+        <!-- Pagination -->
+        <div class="swiper-pagination mt-4"></div>
       </div>
-
-      <!-- Pagination -->
-      <div class="swiper-pagination mt-3"></div>
     </div>
-  </div>
-</section>
+  </section>
 
+
+  <!-- Call to Action -->
+  <section class="py-5 bg-dark">
+    <div class="container text-center">
+      <h2 class="mb-4">Ready to Step Boldly?</h2>
+      <p class="lead mb-4">Explore our collection of handcrafted footwear made just for you</p>
+      <a href="./gallery.html" class="btn btn-warning btn-lg px-4 me-2">Shop Now</a>
+      <a href="./contact.html" class="btn btn-outline-light btn-lg px-4">Contact Us</a>
+    </div>
+  </section>
 
   <!-- Footer -->
-  <footer>
-    <p>&copy; 2025 Fawizy Footwear. All rights reserved.</p>
+  <footer class="footer">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-4 mb-4">
+          <div class="footer-logo">
+            <img src="../media/WhatsApp Image 2025-07-28 at 10.32.31_4cf5d62b.jpg" alt="Fawizy Logo" loading="lazy">
+            <p>Premium handcrafted footwear blending traditional craftsmanship with contemporary design.</p>
+            <div class="social-icons">
+              <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+              <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+              <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+              <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-2 col-md-6 mb-4">
+          <div class="footer-links">
+            <h5>Shop</h5>
+            <ul>
+              <li><a href="./pages/gallery.html">All Products</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-lg-2 col-md-6 mb-4">
+          <div class="footer-links">
+            <h5>Company</h5>
+            <ul>
+              <li><a href="./pages/about.html">About Us</a></li>
+              <li><a href="./pages/contact.html">Contact Us</a></li>
+              <li><a href="./pages/gallery.html">Gallery</a></li>
+              <li><a href="#">Privacy Policy</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-lg-4 mb-4">
+          <div class="footer-links">
+            <h5>Contact</h5>
+           <ul>
+              <li><i class="fas fa-map-marker-alt me-2"></i> Olaogun Street, Ibadan 200113, Oyo, Nigeria</li>
+              <li><i class="fas fa-phone me-2"></i> +234 810 638 3554</li>
+              <li><i class="fas fa-envelope me-2"></i> fawizycrafts@gmail.com</li>
+              <li><i class="fas fa-clock me-2"></i> Mon-Sat: 9AM - 6PM</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="copyright text-center">
+        <p>&copy; 2025 Fawizy Footwear. All Rights Reserved. | <a href="#" class="text-white">Privacy Policy</a> | <a href="#" class="text-white">Terms of Service</a></p>
+      </div>
+    </div>
   </footer>
 
-    <!-- Swiper JS -->
-    
-    <script>
-  var swiper = new Swiper(".testimonialSwiper", {
-    loop: true,
-    autoplay: {
-      delay: 5000,
-    },
-    pagination: {
+  <!-- WhatsApp Floating Chat -->
+  <div class="float-chat">
+    <a href="https://wa.me/2348106383554" target="_blank" aria-label="Chat with us on WhatsApp">
+      <img src="https://img.icons8.com/ios-filled/24/ffffff/whatsapp.png" alt="WhatsApp" loading="lazy" />
+      Chat with us
+    </a>
+  </div>
+
+  <!-- Back to Top Button -->
+  <a href="#nav" class="back-to-top" aria-label="Back to top">
+    <i class="fas fa-arrow-up"></i>
+  </a>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  
+  <!-- Swiper JS -->
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  
+  <script>
+    // Initialize Swiper
+    var swiper = new Swiper(".testimonialSwiper", {
+      loop: true,
+      autoplay: {
+        delay: 5000,
+        disableOnInteraction: false,
+      },
+      pagination: {
         el: ".swiper-pagination",
         clickable: true,
-    },
-});
-</script>
-
-<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+      },
+      breakpoints: {
+        640: {
+          slidesPerView: 1,
+          spaceBetween: 20,
+        },
+        768: {
+          slidesPerView: 2,
+          spaceBetween: 30,
+        },
+        1024: {
+          slidesPerView: 3,
+          spaceBetween: 30,
+        },
+      }
+    });
+    
+    // Navbar scroll effect
+    window.addEventListener('scroll', function() {
+      const navbar = document.querySelector('.navbar');
+      const backToTop = document.querySelector('.back-to-top');
+      
+      if (window.scrollY > 50) {
+        navbar.classList.add('scrolled');
+      } else {
+        navbar.classList.remove('scrolled');
+      }
+      
+      // Back to top button
+      if (window.scrollY > 300) {
+        backToTop.classList.add('active');
+      } else {
+        backToTop.classList.remove('active');
+      }
+    });
+    
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        
+        const targetId = this.getAttribute('href');
+        if (targetId === '#') return;
+        
+        const targetElement = document.querySelector(targetId);
+        if (targetElement) {
+          window.scrollTo({
+            top: targetElement.offsetTop - 80,
+            behavior: 'smooth'
+          });
+          
+          // Update URL without refreshing
+          if (history.pushState) {
+            history.pushState(null, null, targetId);
+          } else {
+            location.hash = targetId;
+          }
+        }
+      });
+    });
+  </script>
 </body>
 </html>

@@ -3,68 +3,457 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Fawizy - Stepping in Style</title>
+  <title>Fawizy - Premium Unisex Footwear | Shoes, Sandals & Palm Slippers</title>
+  <meta name="description" content="Premium unisex footwear - shoes, sandals and palm slippers. Step boldly with Fawizy.">
+  <meta property="og:title" content="Fawizy - Stepping in Style">
+  <meta property="og:description" content="Premium quality unisex footwear collection">
+  <meta property="og:image" content="./media/hero.jpg">
+  <meta property="og:url" content="https://fawizy.com">
+  <link rel="canonical" href="https://fawizy.com"/>
+  
+  <!-- Preload and prefetch -->
+  <link rel="preconnect" href="https://cdn.jsdelivr.net">
+  <link rel="preload" href="./media/hero.webp" as="image">
+  <link rel="preload" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" as="style">
+  
+  <!-- Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <link rel="shortcut icon" href="./media/WhatsApp Image 2025-07-28 at 10.32.31_4cf5d62b.jpg" type="image/x-icon">
+  
   <style>
+    :root {
+      --primary: #f1c40f;
+      --primary-dark: #d4ac0d;
+      --bg: #000;
+      --text: #fff;
+      --text-secondary: #bbb;
+      --card-bg: #111;
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    html {
+      scroll-behavior: smooth;
+    }
+    
     body {
-      background-color: #000;
-      color: #f1c40f;
+      background-color: var(--bg);
+      color: var(--text);
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      line-height: 1.6;
     }
+    
+    /* Navbar */
     .navbar {
-      background-color: #000;
+      background-color: var(--bg);
+      padding: 15px 0;
+      transition: all 0.3s ease;
     }
+    
+    .navbar.scrolled {
+      padding: 10px 0;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    }
+    
     .navbar-brand img {
-      height: 100px;
+      height: 80px;
+      transition: height 0.3s ease;
     }
+    
+    .navbar.scrolled .navbar-brand img {
+      height: 60px;
+    }
+    
     .nav-link {
-      color: #fff !important;
+      color: var(--text) !important;
+      font-weight: 500;
+      margin: 0 10px;
+      position: relative;
+      padding: 8px 0 !important;
     }
+    
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background-color: var(--primary);
+      transition: width 0.3s ease;
+    }
+    
+    .nav-link:hover::after,
+    .nav-link.active::after {
+      width: 100%;
+    }
+    
     .nav-link:hover {
-      color: #f1c40f !important;
+      color: var(--primary) !important;
     }
+    
+    .navbar-toggler {
+      border: none;
+      padding: 0.5rem;
+    }
+    
+    .navbar-toggler:focus {
+      box-shadow: none;
+    }
+    
+    /* Hero Section */
     .hero {
-      background: url('./media/hero.jpg') no-repeat center center/cover;
-      min-height: 90vh;
+      background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('./media/hero.jpg') no-repeat center center/cover;
+      min-height: 100vh;
       display: flex;
       align-items: center;
       justify-content: center;
       text-align: center;
-      color: #f1c40f;
+      color: var(--primary);
+      padding-top: 80px;
     }
+    
+    .hero-content {
+      max-width: 800px;
+      padding: 0 20px;
+      animation: fadeInUp 1s ease;
+    }
+    
     .hero h1 {
-      font-size: 3rem;
-      font-weight: bold;
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      font-weight: 700;
+      margin-bottom: 20px;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
     }
+    
     .hero p {
-      font-size: 1.3rem;
+      font-size: clamp(1.1rem, 2vw, 1.5rem);
+      margin-bottom: 30px;
+      color: var(--text);
     }
+    
+    /* Buttons */
     .btn-gold {
-      background-color: #f1c40f;
+      background-color: var(--primary);
       color: #000;
       border: none;
+      padding: 12px 30px;
+      font-weight: 600;
+      border-radius: 50px;
+      transition: all 0.3s ease;
+      text-transform: uppercase;
+      letter-spacing: 1px;
     }
+    
     .btn-gold:hover {
-      background-color: #d4ac0d;
+      background-color: var(--primary-dark);
+      color: #000;
+      transform: translateY(-3px);
+      box-shadow: 0 10px 20px rgba(241, 196, 15, 0.2);
+    }
+    
+    .btn-outline-gold {
+      border: 2px solid var(--primary);
+      color: var(--primary);
+      background: transparent;
+      padding: 10px 25px;
+      font-weight: 600;
+      border-radius: 50px;
+      transition: all 0.3s ease;
+    }
+    
+    .btn-outline-gold:hover {
+      background-color: var(--primary);
       color: #000;
     }
+    
+    /* Products Section */
     .products {
-      padding: 60px 0;
+      padding: 80px 0;
     }
-    .products h2 {
+    
+    .section-title {
       text-align: center;
-      margin-bottom: 40px;
-      color: #f1c40f;
+      margin-bottom: 50px;
+      color: var(--primary);
+      position: relative;
+      display: inline-block;
+      left: 50%;
+      transform: translateX(-50%);
     }
-    .product-card img {
+    
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 0;
       width: 100%;
-      border-radius: 8px;
+      height: 3px;
+      background-color: var(--primary);
     }
+    
+    .product-card {
+      background: var(--card-bg);
+      border-radius: 10px;
+      overflow: hidden;
+      transition: all 0.3s ease;
+      margin-bottom: 30px;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    
+    .product-card.animate {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
+    .product-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 30px rgba(241, 196, 15, 0.1);
+    }
+    
+    .product-img {
+      width: 100%;
+      height: 300px;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+    
+    .product-card:hover .product-img {
+      transform: scale(1.05);
+    }
+    
+    .product-info {
+      padding: 20px;
+    }
+    
+    .product-title {
+      font-size: 1.2rem;
+      margin-bottom: 10px;
+      color: var(--primary);
+    }
+    
+    /* Reviews Section */
+    .reviews {
+      padding: 80px 0;
+      background: var(--card-bg);
+    }
+    
+    .review-card {
+      background: var(--bg);
+      padding: 30px;
+      border-radius: 10px;
+      margin-bottom: 30px;
+      transition: all 0.3s ease;
+    }
+    
+    .review-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(241, 196, 15, 0.1);
+    }
+    
+    .review-text {
+      font-style: italic;
+      margin-bottom: 20px;
+    }
+    
+    .review-author {
+      font-weight: 700;
+      color: var(--primary);
+    }
+    
+    /* Footer */
     .footer {
       background: #111;
-      color: #bbb;
-      padding: 20px 0;
-      text-align: center;
+      padding: 40px 0 20px;
+    }
+    
+    .footer-logo img {
+      height: 80px;
+      margin-bottom: 20px;
+    }
+    
+    .footer-links h5 {
+      color: var(--primary);
+      margin-bottom: 20px;
+      font-size: 1.2rem;
+    }
+    
+    .footer-links ul {
+      list-style: none;
+      padding: 0;
+    }
+    
+    .footer-links li {
+      margin-bottom: 10px;
+    }
+    
+    .footer-links a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+    
+    .footer-links a:hover {
+      color: var(--primary);
+      padding-left: 5px;
+    }
+    
+    .social-icons {
+      display: flex;
+      gap: 15px;
+      margin-top: 20px;
+    }
+    
+    .social-icons a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 50%;
+      color: var(--text);
+      transition: all 0.3s ease;
+    }
+    
+    .social-icons a:hover {
+      background: var(--primary);
+      color: #000;
+      transform: translateY(-3px);
+    }
+    
+    .copyright {
+      margin-top: 40px;
+      padding-top: 20px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+    }
+    
+    /* WhatsApp Floating Chat */
+    .float-chat {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 999;
+      animation: pulse 1.5s infinite;
+    }
+    
+    .float-chat a {
+      background: #25D366;
+      color: white;
+      padding: 12px 20px;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+      transition: all 0.3s ease;
+    }
+    
+    .float-chat a:hover {
+      background: #20b358;
+      transform: translateY(-3px);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+    }
+    
+    .float-chat img {
+      margin-right: 10px;
+    }
+    
+    /* Back to Top */
+    .back-to-top {
+      position: fixed;
+      bottom: 80px;
+      right: 20px;
+      width: 40px;
+      height: 40px;
+      background: var(--primary);
+      color: #000;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+      z-index: 999;
+    }
+    
+    .back-to-top.active {
+      opacity: 1;
+      visibility: visible;
+    }
+    
+    .back-to-top:hover {
+      background: var(--primary-dark);
+    }
+    
+    /* Animations */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    @keyframes pulse {
+      0% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.05);
+      }
+      100% {
+        transform: scale(1);
+      }
+    }
+    
+    /* Responsive Adjustments */
+    @media (max-width: 991.98px) {
+      .navbar-collapse {
+        background: var(--bg);
+        padding: 20px;
+        margin-top: 15px;
+        border-radius: 5px;
+      }
+      
+      .hero {
+        min-height: 80vh;
+      }
+    }
+    
+    @media (max-width: 767.98px) {
+      .hero h1 {
+        font-size: 2.5rem;
+      }
+      
+      .hero p {
+        font-size: 1.1rem;
+      }
+      
+      .product-img {
+        height: 250px;
+      }
+      
+      .footer-links {
+        margin-bottom: 30px;
+      }
     }
   </style>
 </head>
@@ -76,15 +465,16 @@
       <a class="navbar-brand" href="./index.html">
         <img src="./media/WhatsApp Image 2025-07-28 at 10.32.31_4cf5d62b.jpg" alt="Fawizy Logo">
       </a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
         <ul class="navbar-nav">
-          <li class="nav-item"><a class="nav-link" href="./index.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link active" href="./index.html">Home</a></li>
           <li class="nav-item"><a class="nav-link" href="./pages/about.html">About</a></li>
           <li class="nav-item"><a class="nav-link" href="./pages/gallery.html">Gallery</a></li>
           <li class="nav-item"><a class="nav-link" href="./pages/contact.html">Contact</a></li>
+        <li class="nav-item"><a class="nav-link" href="./pages/legal.html">Legal</a></li>
         </ul>
       </div>
     </div>
@@ -92,34 +482,104 @@
 
   <!-- Hero Section -->
   <section class="hero" id="home">
-    <div class="container">
+    <div class="hero-content">
       <h1>Step Boldly With Fawizy</h1>
-      <p>Unisex Shoes | Sandals | Palms</p>
-      <a href="./pages/gallery.html" class="btn btn-gold mt-3">Explore Collection</a>
+      <p>Premium Unisex Footwear - Handcrafted for Comfort and Style</p>
+      <div class="d-flex justify-content-center gap-3">
+        <a href="./pages/gallery.html" class="btn btn-gold">Explore Collection</a>
+        <a href="#products" class="btn btn-outline-gold">Featured Products</a>
+      </div>
     </div>
   </section>
 
   <!-- Products Section -->
-  <section class="products bg-black text-white" id="products">
+  <section class="products" id="products">
     <div class="container">
-      <h2>Our Featured Products</h2>
-      <div class="row text-center">
-        <div class="col-md-4 mb-4">
+      <h2 class="section-title">Our Featured Products</h2>
+      <div class="row">
+        <div class="col-md-4">
           <div class="product-card">
-            <img src="https://i.pinimg.com/1200x/f1/bb/9b/f1bb9bcdb8d817205f4edb7a4fd8b941.jpg" alt="Shoe" />
-            <h5 class="mt-2">Premium Shoes</h5>
+            <img src="https://i.pinimg.com/1200x/f1/bb/9b/f1bb9bcdb8d817205f4edb7a4fd8b941.jpg" alt="Premium Shoes" class="product-img" loading="lazy">
+            <div class="product-info">
+              <h5 class="product-title">Premium Shoes</h5>
+              <button class="btn btn-gold btn-sm w-100">View Details</button>
+            </div>
           </div>
         </div>
-        <div class="col-md-4 mb-4">
+        <div class="col-md-4">
           <div class="product-card">
-            <img src="https://i.pinimg.com/736x/3d/66/f6/3d66f60e53f37f76fb6c76e0351f2a59.jpg" alt="Sandal" />
-            <h5 class="mt-2">Classic Sandals</h5>
+            <img src="https://i.pinimg.com/736x/3d/66/f6/3d66f60e53f37f76fb6c76e0351f2a59.jpg" alt="Classic Sandals" class="product-img" loading="lazy">
+            <div class="product-info">
+              <h5 class="product-title">Classic Sandals</h5>
+              <button class="btn btn-gold btn-sm w-100">View Details</button>
+            </div>
           </div>
         </div>
-        <div class="col-md-4 mb-4">
+        <div class="col-md-4">
           <div class="product-card">
-            <img src="https://i.pinimg.com/736x/b6/ed/66/b6ed665903da9486f6050efc1ecb0ff1.jpg" alt="Palm Slippers" />
-            <h5 class="mt-2">Palm Slippers</h5>
+            <img src="https://i.pinimg.com/736x/b6/ed/66/b6ed665903da9486f6050efc1ecb0ff1.jpg" alt="Palm Slippers" class="product-img" loading="lazy">
+            <div class="product-info">
+              <h5 class="product-title">Palm Slippers</h5>
+              </div>
+              <button class="btn btn-gold btn-sm w-100">View Details</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="text-center mt-4">
+        <a href="./pages/gallery.html" class="btn btn-outline-gold">View All Products</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Reviews Section -->
+  <section class="reviews">
+    <div class="container">
+      <h2 class="section-title">Customer Reviews</h2>
+      <div class="row">
+        <div class="col-md-4">
+          <div class="review-card">
+            <div class="review-text">
+              "The quality of Fawizy shoes is exceptional. I've been wearing mine daily for 6 months and they still look new. Most comfortable shoes I've ever owned!"
+            </div>
+            <div class="review-author">- Adebayo K.</div>
+            <div class="product-rating">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="review-card">
+            <div class="review-text">
+              "I bought the palm slippers for my entire family. The craftsmanship is amazing and they're perfect for our hot climate. Will definitely buy again!"
+            </div>
+            <div class="review-author">- Chioma M.</div>
+            <div class="product-rating">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star-half-alt"></i>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="review-card">
+            <div class="review-text">
+              "Excellent customer service! They helped me find the perfect size and the delivery was faster than expected. The sandals are stylish and durable."
+            </div>
+            <div class="review-author">- Emeka O.</div>
+            <div class="product-rating">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+            </div>
           </div>
         </div>
       </div>
@@ -129,10 +589,123 @@
   <!-- Footer -->
   <footer class="footer">
     <div class="container">
-      <p>&copy; 2025 Fawizy Footwear. All Rights Reserved.</p>
+      <div class="row">
+        <div class="col-lg-4 mb-4">
+          <div class="footer-logo">
+            <img src="./media/WhatsApp Image 2025-07-28 at 10.32.31_4cf5d62b.jpg" alt="Fawizy Logo">
+            <p>Step boldly with our premium collection of unisex footwear, crafted for comfort, style, and durability.</p>
+            <div class="social-icons">
+              <a href="#"><i class="fab fa-facebook-f"></i></a>
+              <a href="#"><i class="fab fa-instagram"></i></a>
+              <a href="#"><i class="fab fa-x"></i></a>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-2 col-md-6 mb-4">
+          <div class="footer-links">
+            <h5>Shop</h5>
+            <ul>
+              <li><a href="./pages/gallery.html">All Products</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-lg-2 col-md-6 mb-4">
+          <div class="footer-links">
+            <h5>Information</h5>
+            <ul>
+              <li><a href="./pages/about.html">About Us</a></li>
+              <li><a href="./pages/contact.html">Contact Us</a></li>
+              <li><a href="./pages/gallery.html">Gallery</a></li>
+              <li><a href="#">Privacy Policy</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-lg-4 mb-4">
+          <div class="footer-links">
+            <h5>Contact Us</h5>
+            <ul>
+              <li><i class="fas fa-map-marker-alt me-2"></i> Olaogun Street, Ibadan 200113, Oyo, Nigeria</li>
+              <li><i class="fas fa-phone me-2"></i> +234 810 638 3554</li>
+              <li><i class="fas fa-envelope me-2"></i> fawizyross@gmail.com</li>
+              <li><i class="fas fa-clock me-2"></i> Mon-Sat: 9AM - 6PM</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="copyright text-center">
+        <p>&copy; 2025 Fawizy Footwear. All Rights Reserved.</p>
+      </div>
     </div>
   </footer>
 
+  <!-- WhatsApp Floating Chat -->
+  <div class="float-chat">
+    <a href="https://wa.me/2348106383554" target="_blank" aria-label="Chat with us on WhatsApp">
+      <img src="https://img.icons8.com/ios-filled/24/ffffff/whatsapp.png" alt="WhatsApp" />
+      Chat with us
+    </a>
+  </div>
+
+  <!-- Back to Top Button -->
+  <a href="#navbarNav" class="back-to-top" aria-label="Back to top">
+    <i class="fas fa-arrow-up"></i>
+  </a>
+
+  <!-- Bootstrap JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  
+  <script>
+    // Navbar scroll effect
+    window.addEventListener('scroll', function() {
+      const navbar = document.querySelector('.navbar');
+      const backToTop = document.querySelector('.back-to-top');
+      
+      if (window.scrollY > 50) {
+        navbar.classList.add('scrolled');
+      } else {
+        navbar.classList.remove('scrolled');
+      }
+      
+      // Back to top button
+      if (window.scrollY > 300) {
+        backToTop.classList.add('active');
+      } else {
+        backToTop.classList.remove('active');
+      }
+    });
+    
+    // Scroll animation for product cards
+    document.addEventListener('DOMContentLoaded', function() {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('animate');
+          }
+        });
+      }, {threshold: 0.1});
+      
+      document.querySelectorAll('.product-card').forEach(card => {
+        observer.observe(card);
+      });
+      
+      // Smooth scroll for anchor links
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+          e.preventDefault();
+          
+          const targetId = this.getAttribute('href');
+          if (targetId === '#') return;
+          
+          const targetElement = document.querySelector(targetId);
+          if (targetElement) {
+            window.scrollTo({
+              top: targetElement.offsetTop - 80,
+              behavior: 'smooth'
+            });
+          }
+        });
+      });
+    });
+  </script>
 </body>
 </html>

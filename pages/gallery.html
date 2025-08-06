@@ -3,59 +3,41 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Fawizy Gallery</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
-  <style>
-    body {
-      background-color: #000;
-      color: #f1c40f;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    }
-    .navbar {
-      background-color: #000;
-    }
-    .navbar-brand img {
-      height: 100px;
-    }
-    .nav-link {
-      color: #f1c40f !important;
-    }
-    .nav-link:hover {
-      color: #fff !important;
-    }
-    .filter-buttons {
-      margin: 30px 0;
-      text-align: center;
-    }
-    .filter-buttons .btn {
-      margin: 5px;
-    }
-    .product-card {
-      display: none;
-    }
-    .product-card img {
-      width: 100%;
-      border-radius: 8px;
-      height: 250px;
-      object-fit: cover;
-    }
-    .footer {
-      background: #111;
-      color: #bbb;
-      padding: 20px 0;
-      text-align: center;
-    }
-  </style>
+  <title>Fawizy Gallery | Premium Handcrafted Footwear Collection</title>
+  <meta name="description" content="Explore Fawizy's premium collection of handcrafted shoes, sandals and palm slippers. Nigerian-made quality footwear for men and women.">
+  
+  <!-- Preload resources -->
+  <link rel="preload" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" as="style">
+  <link rel="preconnect" href="https://cdn.jsdelivr.net">
+  
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- AOS Animation Library -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  
+  <link rel="shortcut icon" href="../media/WhatsApp Image 2025-07-28 at 10.32.31_4cf5d62b.jpg" type="image/x-icon">
+  <link rel="stylesheet" href="../styles/gallery.css">
+  
+
 </head>
 <body>
 
+  <!-- Loading Spinner -->
+  <div class="loading-spinner">
+    <div class="spinner"></div>
+  </div>
+
   <!-- Navbar -->
-  <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+  <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
     <div class="container">
       <a class="navbar-brand" href="../index.html">
-        <img src="../media/WhatsApp Image 2025-07-28 at 10.32.31_4cf5d62b.jpg" alt="Fawizy Logo">
+        <img src="../media/WhatsApp Image 2025-07-28 at 10.32.31_4cf5d62b.jpg" alt="Fawizy Logo" loading="lazy">
       </a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
@@ -64,219 +46,642 @@
           <li class="nav-item"><a class="nav-link" href="./about.html">About</a></li>
           <li class="nav-item"><a class="nav-link active" href="./gallery.html">Gallery</a></li>
           <li class="nav-item"><a class="nav-link" href="./contact.html">Contact</a></li>
+        <li class="nav-item"><a class="nav-link" href="./legal.html">Legal</a></li>
         </ul>
       </div>
     </div>
   </nav>
 
-  <!-- Filter Buttons -->
-  <div class="container filter-buttons">
-    <h2 class="text-center mb-4">Explore Our Collection</h2>
-    <div class="btn-group">
-      <button class="btn btn-outline-warning" onclick="filterGallery('all')">All</button>
-      <button class="btn btn-outline-warning" onclick="filterGallery('male')">Male</button>
-      <button class="btn btn-outline-warning" onclick="filterGallery('female')">Female</button>
-      <button class="btn btn-outline-warning" onclick="filterGallery('unisex')">Unisex</button>
+  <!-- Gallery Header -->
+  <section class="gallery-header" data-aos="fade">
+    <div class="container gallery-header-content">
+      <h1>Our Premium Collection</h1>
+      <p>Explore our handcrafted footwear - each piece meticulously designed for comfort, durability and timeless style</p>
+      <div class="header-cta">
+        <a href="#gallery-items" class="btn btn-outline-light btn-lg">Browse Collection</a>
+        <a href="./contact.html" class="btn btn-warning btn-lg">Custom Orders</a>
+      </div>
     </div>
-    <div class="btn-group">
-      <button class="btn btn-outline-light" onclick="filterGallery('shoe')">Shoes</button>
-      <button class="btn btn-outline-light" onclick="filterGallery('sandal')">Sandals</button>
-      <button class="btn btn-outline-light" onclick="filterGallery('palm')">Palm</button>
-    </div>
-  </div>
+  </section>
 
-  <!-- Gallery -->
-  <div class="container">
-    <div class="row" id="galleryItems">
-
-      <!-- Example Item -->
-       <div class="col-md-4 mb-4 product-card male shoe">
-        <div class="card h-100 bg-dark text-light" data-bs-toggle="modal" data-bs-target="#productModal" onclick="viewProduct ('Men\'s Classic Shoe', 'https://img.fantaskycdn.com/efb61c4222cb62e4e8f8e1095f0652b2_750x.jpeg')">
-          <img src="https://img.fantaskycdn.com/efb61c4222cb62e4e8f8e1095f0652b2_750x.jpeg" alt="Male Shoe" />
-          <div class="card-body text-center">
-            <h5 class="card-title">Men's Classic Shoe</h5>
+  <!-- Filter Section -->
+  <section class="filter-section" data-aos="fade-down">
+    <div class="container filter-container">
+      <div class="row justify-content-center">
+        <div class="col-lg-12">
+          <div class="filter-buttons">
+            <div class="filter-group">
+              <div class="filter-group-title">Gender</div>
+              <div>
+                <button class="filter-btn active" onclick="filterGallery('all')">
+                  <i class="fas fa-tshirt"></i> All
+                </button>
+                <button class="filter-btn" onclick="filterGallery('male')">
+                  <i class="fas fa-male"></i> Men
+                </button>
+                <button class="filter-btn" onclick="filterGallery('female')">
+                  <i class="fas fa-female"></i> Women
+                </button>
+                <button class="filter-btn" onclick="filterGallery('unisex')">
+                  <i class="fas fa-people-arrows"></i> Unisex
+                </button>
+              </div>
+            </div>
+            
+            <div class="filter-group">
+              <div class="filter-group-title">Category</div>
+              <div>
+                <button class="filter-btn" onclick="filterGallery('shoe')">
+                  <i class="fas fa-shoe-prints"></i> Shoes
+                </button>
+                <button class="filter-btn" onclick="filterGallery('sandal')">
+                  <i class="fas fa-socks"></i> Sandals
+                </button>
+                <button class="filter-btn" onclick="filterGallery('palm')">
+                  <i class="fas fa-leaf"></i> Palm
+                </button>
+              </div>
+            </div>
           </div>
         </div>
       </div>
-      <div class="col-md-4 mb-4 product-card male shoe">
-        <div class="card h-100 bg-dark text-light" data-bs-toggle="modal" data-bs-target="#productModal" onclick="viewProduct ('Men\'s Classic Shoe', 'https://img-va.myshopline.com/image/store/1741579819652/de1d4e9906e0c035d069d1748127636e_491x.jpg?w=491&h=515&q=100')">
-          <img src="https://img-va.myshopline.com/image/store/1741579819652/de1d4e9906e0c035d069d1748127636e_491x.jpg?w=491&h=515&q=100" alt="Male Shoe" />
-          <div class="card-body text-center">
-            <h5 class="card-title">Men's Classic Shoe</h5>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-4 mb-4 product-card male shoe">
-        <div class="card h-100 bg-dark text-light" data-bs-toggle="modal" data-bs-target="#productModal" onclick="viewProduct ('Men\'s Classic Shoe', 'https://i.pinimg.com/1200x/f1/bb/9b/f1bb9bcdb8d817205f4edb7a4fd8b941.jpg')">
-          <img src="https://i.pinimg.com/1200x/f1/bb/9b/f1bb9bcdb8d817205f4edb7a4fd8b941.jpg" alt="Male Shoe" />
-          <div class="card-body text-center">
-            <h5 class="card-title">Men's Classic Shoe</h5>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-4 mb-4 product-card male shoe">
-        <div class="card h-100 bg-dark text-light" data-bs-toggle="modal" data-bs-target="#productModal" onclick="viewProduct ('Men\'s Classic Shoe', 'https://i.pinimg.com/1200x/47/a9/2f/47a92fb52dcd81091536d37b4a8efd99.jpg')">
-          <img src="https://i.pinimg.com/1200x/47/a9/2f/47a92fb52dcd81091536d37b4a8efd99.jpg" alt="Male Shoe" />
-          <div class="card-body text-center">
-            <h5 class="card-title">Men's Classic Shoe</h5>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-4 mb-4 product-card male sandal">
-        <div class="card h-100 bg-dark text-light" data-bs-toggle="modal" data-bs-target="#productModal" onclick="viewProduct ('Men\'s Classic Shoe', 'https://i.pinimg.com/736x/47/54/06/4754066fd46c840e1ffbaf957b038433.jpg')">
-          <img src="https://i.pinimg.com/736x/47/54/06/4754066fd46c840e1ffbaf957b038433.jpg" alt="Male Shoe" />
-          <div class="card-body text-center">
-            <h5 class="card-title">Men's Classic Sandal</h5>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-4 mb-4 product-card male sandal">
-        <div class="card h-100 bg-dark text-light" data-bs-toggle="modal" data-bs-target="#productModal" onclick="viewProduct ('Men\'s Classic Shoe', 'https://i.pinimg.com/736x/c8/82/34/c882344c336329ecb7167847090d5d68.jpg')">
-          <img src="https://i.pinimg.com/736x/c8/82/34/c882344c336329ecb7167847090d5d68.jpg" alt="Male Shoe" />
-          <div class="card-body text-center">
-            <h5 class="card-title">Men's Classic Sandal</h5>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-4 mb-4 product-card male sandal">
-        <div class="card h-100 bg-dark text-light" data-bs-toggle="modal" data-bs-target="#productModal" onclick="viewProduct ('Men\'s Classic Shoe', 'https://i.pinimg.com/736x/3d/66/f6/3d66f60e53f37f76fb6c76e0351f2a59.jpg')">
-          <img src="https://i.pinimg.com/736x/3d/66/f6/3d66f60e53f37f76fb6c76e0351f2a59.jpg" alt="Male Shoe" />
-          <div class="card-body text-center">
-            <h5 class="card-title">Men's Classic Sandal</h5>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-4 mb-4 product-card male palm">
-        <div class="card h-100 bg-dark text-light" data-bs-toggle="modal" data-bs-target="#productModal" onclick="viewProduct ('Men\'s Classic Shoe', 'https://i.pinimg.com/736x/77/1a/b1/771ab1894ed44d468db3173e0ee88069.jpg')">
-          <img src="https://i.pinimg.com/736x/77/1a/b1/771ab1894ed44d468db3173e0ee88069.jpg" alt="Male Shoe" />
-          <div class="card-body text-center">
-            <h5 class="card-title">Men's Palm</h5>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-4 mb-4 product-card male palm">
-        <div class="card h-100 bg-dark text-light" data-bs-toggle="modal" data-bs-target="#productModal" onclick="viewProduct ('Men\'s Classic Shoe', 'https://i.pinimg.com/736x/36/97/8f/36978f85789fdff5082006965d038731.jpg')">
-          <img src="https://i.pinimg.com/736x/36/97/8f/36978f85789fdff5082006965d038731.jpg" alt="Male Shoe" />
-          <div class="card-body text-center">
-            <h5 class="card-title">Men's Palm</h5>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-4 mb-4 product-card male palm">
-        <div class="card h-100 bg-dark text-light" data-bs-toggle="modal" data-bs-target="#productModal" onclick="viewProduct ('Men\'s Classic Shoe', 'https://i.pinimg.com/736x/c5/1d/47/c51d4795feb2478f82cbd6b41caaf270.jpg')">
-          <img src="https://i.pinimg.com/736x/c5/1d/47/c51d4795feb2478f82cbd6b41caaf270.jpg" alt="Male Shoe" />
-          <div class="card-body text-center">
-            <h5 class="card-title">Men's Palm</h5>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-4 mb-4 product-card unisex palm">
-        <div class="card h-100 bg-dark text-light" data-bs-toggle="modal" data-bs-target="#productModal" onclick="viewProduct ('Men\'s Classic Shoe', 'https://i.pinimg.com/736x/a1/24/4c/a1244c80720420a5b7e4801b3714d09a.jpg')">
-          <img src="https://i.pinimg.com/736x/a1/24/4c/a1244c80720420a5b7e4801b3714d09a.jpg" alt="Male Shoe" />
-          <div class="card-body text-center">
-            <h5 class="card-title">Unisex Palm</h5>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-4 mb-4 product-card unisex palm">
-        <div class="card h-100 bg-dark text-light" data-bs-toggle="modal" data-bs-target="#productModal" onclick="viewProduct ('Men\'s Classic Shoe', 'https://i.pinimg.com/1200x/fd/84/13/fd8413506fdc5c0bf05e332c302bb9e3.jpg')">
-          <img src="https://i.pinimg.com/1200x/fd/84/13/fd8413506fdc5c0bf05e332c302bb9e3.jpg" alt="Male Shoe" />
-          <div class="card-body text-center">
-            <h5 class="card-title">Unisex Palm</h5>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-4 mb-4 product-card unisex palm">
-        <div class="card h-100 bg-dark text-light" data-bs-toggle="modal" data-bs-target="#productModal" onclick="viewProduct ('Men\'s Classic Shoe', 'https://i.pinimg.com/1200x/f1/0a/85/f10a8561efb23c3767f45e225360bd9d.jpg')">
-          <img src="https://i.pinimg.com/1200x/f1/0a/85/f10a8561efb23c3767f45e225360bd9d.jpg" alt="Male Shoe" />
-          <div class="card-body text-center">
-            <h5 class="card-title">Unisex Palm</h5>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-4 mb-4 product-card female palm">
-        <div class="card h-100 bg-dark text-light" data-bs-toggle="modal" data-bs-target="#productModal" onclick="viewProduct ('Men\'s Classic Shoe', 'https://i.pinimg.com/1200x/ff/9b/12/ff9b12c1058156ff39391bbbf6b4d1d9.jpg')">
-          <img src="https://i.pinimg.com/1200x/ff/9b/12/ff9b12c1058156ff39391bbbf6b4d1d9.jpg" alt="Male Shoe" />
-          <div class="card-body text-center">
-            <h5 class="card-title">Female Palm</h5>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-4 mb-4 product-card female palm">
-        <div class="card h-100 bg-dark text-light" data-bs-toggle="modal" data-bs-target="#productModal" onclick="viewProduct ('Men\'s Classic Shoe', 'https://i.pinimg.com/1200x/35/81/f9/3581f9fa514284c8beb40e6ff844c338.jpg')">
-          <img src="https://i.pinimg.com/1200x/35/81/f9/3581f9fa514284c8beb40e6ff844c338.jpg" alt="Male Shoe" />
-          <div class="card-body text-center">
-            <h5 class="card-title">Women's Palm</h5>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-4 mb-4 product-card female sandal">
-        <div class="card h-100 bg-dark text-light" data-bs-toggle="modal" data-bs-target="#productModal" onclick="viewProduct ('Men\'s Classic Shoe', 'https://i.pinimg.com/736x/e1/4d/06/e14d06cbbfa012de49f9283da2bdca5c.jpg')">
-          <img src="https://i.pinimg.com/736x/e1/4d/06/e14d06cbbfa012de49f9283da2bdca5c.jpg" alt="Male Shoe" />
-          <div class="card-body text-center">
-            <h5 class="card-title">Women's Classic Sandal</h5>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-4 mb-4 product-card female sandal">
-        <div class="card h-100 bg-dark text-light" data-bs-toggle="modal" data-bs-target="#productModal" onclick="viewProduct ('Men\'s Classic Shoe', 'https://i.pinimg.com/1200x/53/69/1d/53691d2a88b4d343a4f6467175bcfb56.jpg')">
-          <img src="https://i.pinimg.com/1200x/53/69/1d/53691d2a88b4d343a4f6467175bcfb56.jpg" alt="Male Shoe" />
-          <div class="card-body text-center">
-            <h5 class="card-title">Women's Classic Sandal</h5>
-          </div>
-        </div>
-      </div>
-     
-      
     </div>
-  </div>
+  </section>
+
+  <!-- Gallery Container -->
+  <section class="gallery-container">
+    <div class="container">
+      <div class="row" id="gallery-items">
+        <!-- Male Shoes -->
+        <div class="col-lg-4 col-md-6 product-card male shoe classic" data-aos="fade-up" data-aos-delay="50">
+          <div class="product-card-inner" data-bs-toggle="modal" data-bs-target="#productModal" onclick="viewProduct('Men\'s Classic Leather Shoe', 'https://img.fantaskycdn.com/efb61c4222cb62e4e8f8e1095f0652b2_750x.jpeg','shoe', 'Premium full-grain leather upper with cushioned insole for all-day comfort. Hand-stitched detailing with durable rubber sole.', 'Classic Collection')">
+            <div class="product-image-container">
+              <span class="product-badge">Bestseller</span>
+              <img src="https://img.fantaskycdn.com/efb61c4222cb62e4e8f8e1095f0652b2_750x.jpeg" class="product-image" alt="Men's Classic Leather Shoe" loading="lazy">
+            </div>
+            <div class="product-info">
+              <h5 class="product-title">Men's Classic Leather</h5>
+              <div class="product-category">Shoes • Classic Collection</div>
+              <div class="product-rating">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star-half-alt"></i>
+                <span>(42)</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="col-lg-4 col-md-6 product-card male shoe premium" data-aos="fade-up" data-aos-delay="100">
+          <div class="product-card-inner" data-bs-toggle="modal" data-bs-target="#productModal" onclick="viewProduct('Men\'s Executive Oxford', 'https://img-va.myshopline.com/image/store/1741579819652/de1d4e9906e0c035d069d1748127636e_491x.jpg?w=491&h=515&q=100', 'shoe', 'Premium oxford shoes with perforated detailing. Made with imported Italian leather and breathable lining.', 'Premium Collection')">
+            <div class="product-image-container">
+              <span class="product-badge">Premium</span>
+              <img src="https://img-va.myshopline.com/image/store/1741579819652/de1d4e9906e0c035d069d1748127636e_491x.jpg?w=491&h=515&q=100" class="product-image" alt="Men's Executive Oxford" loading="lazy">
+            </div>
+            <div class="product-info">
+              <h5 class="product-title">Executive Oxford</h5>
+              <div class="product-category">Shoes • Premium Collection</div>
+              <div class="product-rating">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <span>(36)</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="col-lg-4 col-md-6 product-card male shoe new" data-aos="fade-up" data-aos-delay="150">
+          <div class="product-card-inner" data-bs-toggle="modal" data-bs-target="#productModal" onclick="viewProduct('Men\'s Modern Loafers', 'https://i.pinimg.com/1200x/f1/bb/9b/f1bb9bcdb8d817205f4edb7a4fd8b941.jpg', 'shoe', 'Contemporary loafers with sleek design. Features memory foam insoles and flexible rubber soles for maximum comfort.', 'New Arrivals')">
+            <div class="product-image-container">
+              <span class="product-badge">New</span>
+              <img src="https://i.pinimg.com/1200x/f1/bb/9b/f1bb9bcdb8d817205f4edb7a4fd8b941.jpg" class="product-image" alt="Men's Modern Loafers" loading="lazy">
+            </div>
+            <div class="product-info">
+              <h5 class="product-title">Modern Loafers</h5>
+              <div class="product-category">Shoes • New Arrivals</div>
+              <div class="product-rating">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="far fa-star"></i>
+                <span>(18)</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Male Sandals -->
+        <div class="col-lg-4 col-md-6 product-card male sandal classic" data-aos="fade-up" data-aos-delay="200">
+          <div class="product-card-inner" data-bs-toggle="modal" data-bs-target="#productModal" onclick="viewProduct('Men\'s Leather Sandals', 'https://i.pinimg.com/736x/47/54/06/4754066fd46c840e1ffbaf957b038433.jpg', 'sandal', 'Classic leather sandals with adjustable straps. Durable sole with arch support for long-lasting comfort.', 'Classic Collection')">
+            <div class="product-image-container">
+              <img src="https://i.pinimg.com/736x/47/54/06/4754066fd46c840e1ffbaf957b038433.jpg" class="product-image" alt="Men's Leather Sandals" loading="lazy">
+            </div>
+            <div class="product-info">
+              <h5 class="product-title">Leather Sandals</h5>
+              <div class="product-category">Sandals • Classic Collection</div>
+              <div class="product-rating">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star-half-alt"></i>
+                <span>(29)</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="col-lg-4 col-md-6 product-card male sandal premium" data-aos="fade-up" data-aos-delay="250">
+          <div class="product-card-inner" data-bs-toggle="modal" data-bs-target="#productModal" onclick="viewProduct('Men\'s Premium Slide Sandals', 'https://i.pinimg.com/736x/c8/82/34/c882344c336329ecb7167847090d5d68.jpg', 'sandal', 'Luxury slide sandals with cushioned footbed. Made with premium leather and anti-slip rubber sole.', 'Premium Collection')">
+            <div class="product-image-container">
+              <span class="product-badge">Premium</span>
+              <img src="https://i.pinimg.com/736x/c8/82/34/c882344c336329ecb7167847090d5d68.jpg" class="product-image" alt="Men's Premium Slide Sandals" loading="lazy">
+            </div>
+            <div class="product-info">
+              <h5 class="product-title">Premium Slide Sandals</h5>
+              <div class="product-category">Sandals • Premium Collection</div>
+              <div class="product-rating">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <span>(31)</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Male Palm -->
+        <div class="col-lg-4 col-md-6 product-card male palm classic" data-aos="fade-up" data-aos-delay="300">
+          <div class="product-card-inner" data-bs-toggle="modal" data-bs-target="#productModal" onclick="viewProduct('Men\'s Traditional Palm', 'https://i.pinimg.com/736x/77/1a/b1/771ab1894ed44d468db3173e0ee88069.jpg', 'palm', 'Handwoven palm slippers with leather accents. Traditional craftsmanship meets modern comfort.', 'Classic Collection')">
+            <div class="product-image-container">
+              <img src="https://i.pinimg.com/736x/77/1a/b1/771ab1894ed44d468db3173e0ee88069.jpg" class="product-image" alt="Men's Traditional Palm" loading="lazy">
+            </div>
+            <div class="product-info">
+              <h5 class="product-title">Traditional Palm</h5>
+              <div class="product-category">Palm • Classic Collection</div>
+              <div class="product-rating">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="far fa-star"></i>
+                <span>(24)</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Unisex Palm -->
+        <div class="col-lg-4 col-md-6 product-card unisex palm classic" data-aos="fade-up" data-aos-delay="50">
+          <div class="product-card-inner" data-bs-toggle="modal" data-bs-target="#productModal" onclick="viewProduct('Unisex Braided Palm', 'https://i.pinimg.com/736x/a1/24/4c/a1244c80720420a5b7e4801b3714d09a.jpg', 'palm', 'Versatile braided palm slippers suitable for all. Lightweight and breathable for tropical climates.', 'Classic Collection')">
+            <div class="product-image-container">
+              <img src="https://i.pinimg.com/736x/a1/24/4c/a1244c80720420a5b7e4801b3714d09a.jpg" class="product-image" alt="Unisex Braided Palm" loading="lazy">
+            </div>
+            <div class="product-info">
+              <h5 class="product-title">Braided Palm</h5>
+              <div class="product-category">Palm • Classic Collection</div>
+              <div class="product-rating">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star-half-alt"></i>
+                <span>(38)</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="col-lg-4 col-md-6 product-card unisex palm new" data-aos="fade-up" data-aos-delay="100">
+          <div class="product-card-inner" data-bs-toggle="modal" data-bs-target="#productModal" onclick="viewProduct('Unisex Modern Palm', 'https://i.pinimg.com/1200x/fd/84/13/fd8413506fdc5c0bf05e332c302bb9e3.jpg', 'palm', 'Contemporary palm design with ergonomic footbed. Combines traditional materials with modern styling.', 'New Arrivals')">
+            <div class="product-image-container">
+              <span class="product-badge">New</span>
+              <img src="https://i.pinimg.com/1200x/fd/84/13/fd8413506fdc5c0bf05e332c302bb9e3.jpg" class="product-image" alt="Unisex Modern Palm" loading="lazy">
+            </div>
+            <div class="product-info">
+              <h5 class="product-title">Modern Palm</h5>
+              <div class="product-category">Palm • New Arrivals</div>
+              <div class="product-rating">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <span>(15)</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Female Shoes -->
+        <div class="col-lg-4 col-md-6 product-card female shoe premium" data-aos="fade-up" data-aos-delay="150">
+          <div class="product-card-inner" data-bs-toggle="modal" data-bs-target="#productModal" onclick="viewProduct('Women\'s Elegant Pumps', 'https://i.pinimg.com/1200x/47/a9/2f/47a92fb52dcd81091536d37b4a8efd99.jpg', 'shoe', 'Sophisticated pumps with comfortable heel. Made with soft leather and cushioned insole for all-day wear.', 'Premium Collection')">
+            <div class="product-image-container">
+              <span class="product-badge">Premium</span>
+              <img src="https://i.pinimg.com/1200x/47/a9/2f/47a92fb52dcd81091536d37b4a8efd99.jpg" class="product-image" alt="Women's Elegant Pumps" loading="lazy">
+            </div>
+            <div class="product-info">
+              <h5 class="product-title">Elegant Pumps</h5>
+              <div class="product-category">Shoes • Premium Collection</div>
+              <div class="product-rating">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star-half-alt"></i>
+                <span>(27)</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Female Sandals -->
+        <div class="col-lg-4 col-md-6 product-card female sandal new" data-aos="fade-up" data-aos-delay="200">
+          <div class="product-card-inner" data-bs-toggle="modal" data-bs-target="#productModal" onclick="viewProduct('Women\'s Strappy Sandals', 'https://i.pinimg.com/736x/e1/4d/06/e14d06cbbfa012de49f9283da2bdca5c.jpg', 'sandal', 'Fashionable strappy sandals with adjustable buckles. Lightweight and comfortable for all occasions.', 'New Arrivals')">
+            <div class="product-image-container">
+              <span class="product-badge">New</span>
+              <img src="https://i.pinimg.com/736x/e1/4d/06/e14d06cbbfa012de49f9283da2bdca5c.jpg" class="product-image" alt="Women's Strappy Sandals" loading="lazy">
+            </div>
+            <div class="product-info">
+              <h5 class="product-title">Strappy Sandals</h5>
+              <div class="product-category">Sandals • New Arrivals</div>
+              <div class="product-rating">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="far fa-star"></i>
+                <span>(19)</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="col-lg-4 col-md-6 product-card female sandal classic" data-aos="fade-up" data-aos-delay="250">
+          <div class="product-card-inner" data-bs-toggle="modal" data-bs-target="#productModal" onclick="viewProduct('Women\'s Classic Slides', 'https://i.pinimg.com/1200x/53/69/1d/53691d2a88b4d343a4f6467175bcfb56.jpg', 'sandal', 'Timeless slide sandals with contoured footbed. Perfect for casual outings and everyday wear.', 'Classic Collection')">
+            <div class="product-image-container">
+              <img src="https://i.pinimg.com/1200x/53/69/1d/53691d2a88b4d343a4f6467175bcfb56.jpg" class="product-image" alt="Women's Classic Slides" loading="lazy">
+            </div>
+            <div class="product-info">
+              <h5 class="product-title">Classic Slides</h5>
+              <div class="product-category">Sandals • Classic Collection</div>
+              <div class="product-rating">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star-half-alt"></i>
+                <span>(33)</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Female Palm -->
+        <div class="col-lg-4 col-md-6 product-card female palm classic" data-aos="fade-up" data-aos-delay="300">
+          <div class="product-card-inner" data-bs-toggle="modal" data-bs-target="#productModal" onclick="viewProduct('Women\'s Delicate Palm', 'https://i.pinimg.com/1200x/ff/9b/12/ff9b12c1058156ff39391bbbf6b4d1d9.jpg', 'palm', 'Delicately woven palm slippers with feminine detailing. Lightweight and comfortable for home and outdoor wear.', 'Classic Collection')">
+            <div class="product-image-container">
+              <img src="https://i.pinimg.com/1200x/ff/9b/12/ff9b12c1058156ff39391bbbf6b4d1d9.jpg" class="product-image" alt="Women's Delicate Palm" loading="lazy">
+            </div>
+            <div class="product-info">
+              <h5 class="product-title">Delicate Palm</h5>
+              <div class="product-category">Palm • Classic Collection</div>
+              <div class="product-rating">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <span>(41)</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Call to Action -->
+  <section class="py-5 bg-dark" data-aos="fade-up">
+    <div class="container text-center">
+      <h2 class="mb-4">Can't Find What You're Looking For?</h2>
+      <p class="lead mb-4">We offer custom footwear tailored to your preferences</p>
+      <a href="./contact.html" class="btn btn-warning btn-lg px-5">Request Custom Design</a>
+    </div>
+  </section>
 
   <!-- Footer -->
-  <footer class="footer mt-5">
+  <footer class="footer">
     <div class="container">
-      <p>&copy; 2025 Fawizy Crafts. All Rights Reserved.</p>
+      <div class="row">
+        <div class="col-lg-4 mb-4">
+          <div class="footer-logo">
+            <img src="../media/WhatsApp Image 2025-07-28 at 10.32.31_4cf5d62b.jpg" alt="Fawizy Logo" loading="lazy">
+            <p>Premium handcrafted footwear blending traditional craftsmanship with contemporary design.</p>
+            <div class="social-icons">
+              <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+              <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+              <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+              <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-2 col-md-6 mb-4">
+          <div class="footer-links">
+            <h5>Shop</h5>
+            <ul>
+              <li><a href="./gallery.html"><i class="fas fa-chevron-right"></i> All Products</a></li>
+              <li><a href="./gallery.html"><i class="fas fa-chevron-right"></i> New Arrivals</a></li>
+              <li><a href="./gallery.html"><i class="fas fa-chevron-right"></i> Best Sellers</a></li>
+              <li><a href="./gallery.html"><i class="fas fa-chevron-right"></i> Special Offers</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-lg-2 col-md-6 mb-4">
+          <div class="footer-links">
+            <h5>Company</h5>
+            <ul>
+              <li><a href="./about.html"><i class="fas fa-chevron-right"></i> About Us</a></li>
+              <li><a href="./about.html"><i class="fas fa-chevron-right"></i> Our Story</a></li>
+              <li><a href="./about.html"><i class="fas fa-chevron-right"></i> Contact Us</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-lg-4 mb-4">
+          <div class="footer-links">
+            <h5>Contact</h5>
+             <ul>
+              <li><i class="fas fa-map-marker-alt me-2"></i> Olaogun Street, Ibadan 200113, Oyo, Nigeria</li>
+              <li><i class="fas fa-phone me-2"></i> +234 810 638 3554</li>
+              <li><i class="fas fa-envelope me-2"></i> fawizycrafts@gmail.com</li>
+              <li><i class="fas fa-clock me-2"></i> Mon-Sat: 9AM - 6PM</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="copyright">
+        <p>&copy; 2025 Fawizy Footwear. All Rights Reserved. | <a href="#" class="text-white">Privacy Policy</a> | <a href="#" class="text-white">Terms of Service</a></p>
+      </div>
     </div>
   </footer>
 
+  <!-- WhatsApp Floating Chat -->
+  <div class="float-chat">
+    <a href="https://wa.me/2348106383554" target="_blank" aria-label="Chat with us on WhatsApp">
+      <i class="fab fa-whatsapp"></i>
+      <span>Chat with us</span>
+    </a>
+  </div>
+
+  <!-- Back to Top Button -->
+  <a href="#" class="back-to-top" aria-label="Back to top">
+    <i class="fas fa-arrow-up"></i>
+  </a>
+
   <!-- Product Modal -->
-<div class="modal fade" id="productModal" tabindex="-1" aria-labelledby="productModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered modal-lg">
-    <div class="modal-content bg-dark text-light">
-      <div class="modal-header border-0">
-        <h5 class="modal-title" id="productModalLabel"></h5>
-        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
-      </div>
-      <div class="modal-body text-center">
-        <img id="modalProductImage" src="" class="img-fluid mb-3 rounded" alt="Product" style="max-height: 400px;">
-        <p class="lead">This is a premium handmade footwear designed with comfort and style in mind. Order now on WhatsApp!</p>
-        <a href="https://wa.me/2348106383554" class="btn btn-warning mt-2" target="_blank">Order via WhatsApp</a>
+  <div class="modal fade product-modal" id="productModal" tabindex="-1" aria-labelledby="productModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="productModalLabel"></h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="product-modal-img-container">
+                <img id="modalProductImage" src="" class="product-modal-img" alt="Product" loading="lazy">
+              </div>
+            </div>
+            <div class="col-md-6 product-modal-details">
+              <div id="modalProductCollection" class="text-muted mb-2"></div>
+              <div id="modalProductPrice" class="product-modal-price"></div>
+              <div class="product-rating mb-3">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star-half-alt"></i>
+                <span>(24 reviews)</span>
+              </div>
+              <p id="modalProductDescription" class="product-modal-description"></p>
+              
+              <div class="product-features">
+                <h6>Features:</h6>
+                <ul>
+                  <li>Premium quality materials</li>
+                  <li>Handcrafted with attention to detail</li>
+                  <li>Comfortable for all-day wear</li>
+                  <li>Durable construction</li>
+                </ul>
+              </div>
+              
+              <div class="size-guide">
+                <a href="#" class="size-guide-btn" data-bs-toggle="modal" data-bs-target="#sizeGuideModal">
+                  <i class="fas fa-ruler"></i> Size Guide
+                </a>
+              </div>
+              
+              <a href="#" id="whatsappOrderBtn" class="whatsapp-btn mt-4">
+                <i class="fab fa-whatsapp"></i> Order on WhatsApp
+              </a>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
-</div>
 
-  <!-- Script -->
+  <!-- Size Guide Modal -->
+  <div class="modal fade" id="sizeGuideModal" tabindex="-1" aria-labelledby="sizeGuideModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content bg-dark">
+        <div class="modal-header">
+          <h5 class="modal-title" id="sizeGuideModalLabel">Size Guide</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="table-responsive">
+            <table class="table table-dark table-bordered">
+              <thead>
+                <tr>
+                  <th>Size</th>
+                  <th>EU</th>
+                  <th>US</th>
+                  <th>UK</th>
+                  <th>Foot Length (cm)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>S</td>
+                  <td>36-37</td>
+                  <td>5-6</td>
+                  <td>3-4</td>
+                  <td>22-23</td>
+                </tr>
+                <tr>
+                  <td>M</td>
+                  <td>38-39</td>
+                  <td>7-8</td>
+                  <td>5-6</td>
+                  <td>24-25</td>
+                </tr>
+                <tr>
+                  <td>L</td>
+                  <td>40-41</td>
+                  <td>9-10</td>
+                  <td>7-8</td>
+                  <td>26-27</td>
+                </tr>
+                <tr>
+                  <td>XL</td>
+                  <td>42-43</td>
+                  <td>11-12</td>
+                  <td>9-10</td>
+                  <td>28-29</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="mt-3">For custom sizes or special requests, please contact us via WhatsApp.</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  
+  <!-- AOS Animation Library -->
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  
   <script>
+    // Initialize AOS animation library
+    AOS.init({
+      duration: 800,
+      easing: 'ease-in-out',
+      once: true
+    });
+    
+    // Show loading spinner
+    document.addEventListener('DOMContentLoaded', function() {
+      const loadingSpinner = document.querySelector('.loading-spinner');
+      loadingSpinner.style.display = 'flex';
+      
+      // Hide spinner after all assets are loaded
+      window.addEventListener('load', function() {
+        setTimeout(function() {
+          loadingSpinner.style.display = 'none';
+        }, 500);
+      });
+    });
+    
+    // Filter Gallery Function
     function filterGallery(filter) {
+      // Show loading spinner
+      document.querySelector('.loading-spinner').style.display = 'flex';
+      
+      // Update active button
+      document.querySelectorAll('.filter-btn').forEach(btn => {
+        btn.classList.remove('active');
+      });
+      event.target.classList.add('active');
+      
+      // Show all cards first
       let cards = document.querySelectorAll('.product-card');
+      cards.forEach(card => {
+        card.style.display = 'none';
+      });
+      
+      // If 'all' is selected, show all cards
       if (filter === 'all') {
-        cards.forEach(c => c.style.display = 'block');
+        cards.forEach(card => {
+          card.style.display = 'block';
+          AOS.refresh(); // Refresh animations for newly shown elements
+        });
       } else {
-        cards.forEach(c => {
-          c.style.display = c.classList.contains(filter) ? 'block' : 'none';
+        // Show cards that match the filter
+        cards.forEach(card => {
+          if (card.classList.contains(filter)) {
+            card.style.display = 'block';
+            AOS.refresh(); // Refresh animations for newly shown elements
+          }
         });
       }
+      
+      // Hide loading spinner after short delay
+      setTimeout(function() {
+        document.querySelector('.loading-spinner').style.display = 'none';
+      }, 300);
     }
-
-    // Show all by default
-    filterGallery('all');
-
-     function viewProduct(title, imageUrl) {
-    document.getElementById('productModalLabel').textContent = title;
-    document.getElementById('modalProductImage').src = imageUrl;
-  }
+    
+    // View Product in Modal
+    function viewProduct(title, imageUrl, price, category, description, collection) {
+      document.getElementById('productModalLabel').textContent = title;
+      document.getElementById('modalProductImage').src = imageUrl;
+      document.getElementById('modalProductPrice').textContent = price;
+      document.getElementById('modalProductCollection').textContent = collection;
+      document.getElementById('modalProductDescription').textContent = description;
+      
+      // Update WhatsApp link with product info
+      const whatsappBtn = document.getElementById('whatsappOrderBtn');
+      const message = `I'm interested in purchasing the ${title} (${price}) from your ${collection}. Please provide more details.`;
+      whatsappBtn.href = `https://wa.me/2348106383554?text=${encodeURIComponent(message)}`;
+    }
+    
+    // Navbar scroll effect
+    window.addEventListener('scroll', function() {
+      const navbar = document.querySelector('.navbar');
+      const backToTop = document.querySelector('.back-to-top');
+      
+      if (window.scrollY > 50) {
+        navbar.classList.add('scrolled');
+      } else {
+        navbar.classList.remove('scrolled');
+      }
+      
+      // Back to top button
+      if (window.scrollY > 300) {
+        backToTop.classList.add('active');
+      } else {
+        backToTop.classList.remove('active');
+      }
+    });
+    
+    // Initialize - show all products
+    document.addEventListener('DOMContentLoaded', function() {
+      filterGallery('all');
+      
+      // Smooth scroll for anchor links
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+          e.preventDefault();
+          
+          const targetId = this.getAttribute('href');
+          if (targetId === '#') return;
+          
+          const targetElement = document.querySelector(targetId);
+          if (targetElement) {
+            window.scrollTo({
+              top: targetElement.offsetTop - 80,
+              behavior: 'smooth'
+            });
+          }
+        });
+      });
+    });
   </script>
-
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
